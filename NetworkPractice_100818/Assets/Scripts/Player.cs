@@ -5,17 +5,22 @@ public class Player : NetworkBehaviour
 {
 	GameController gc;
 	[SyncVar]
-	public string username;
-
+	private string username;
+	public string userDisplay;
+	[SyncVar]
+	private Color c;
 	void Start()
 	{
 		gc = GameObject.Find("GameController").GetComponent<GameController>();
-		GetComponent<MeshRenderer> ().material.color = gc.color;
-		username = gc.username;
+		if (isLocalPlayer) {
+			username = gc.username;
+			c = gc.color;
+		}
+		GetComponent<MeshRenderer> ().material.color = c;
 	}
     void Update()
     {
-		
+		userDisplay = username;
         if (!isLocalPlayer)
         {
             return;

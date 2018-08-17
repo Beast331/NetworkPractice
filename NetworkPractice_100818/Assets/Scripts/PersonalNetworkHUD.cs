@@ -6,14 +6,12 @@ using UnityEngine.UI;
 public class PersonalNetworkHUD : NetworkManager {
 
 	// Use this for initialization
-	GameController gc;
 	public bool hostCreated;
 	private int numberOfSpawns;
 	NetworkStartPosition [] startingPositions;
 
 	void Start()
 	{
-		gc = GameObject.Find("GameController").GetComponent<GameController>();
 		startingPositions = FindObjectsOfType<NetworkStartPosition>();
 	}
 	public void StartupHost()

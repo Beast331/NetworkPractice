@@ -14,9 +14,14 @@ public class NetworkController : NetworkBehaviour {
 	void Update () {
 		
 	}
+		
+	public void DisableCanvases()
+	{
+		RpcDisableCanvases ();
+	}
 
 	[ClientRpc]
-	public void RpcDisableCanvases()
+	void RpcDisableCanvases()
 	{
 		for (int i = 0; i < gc.canvases.Length; i++)
 		{

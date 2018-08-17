@@ -11,7 +11,7 @@ public class GameController : MonoBehaviour {
 	public Canvas [] canvases;
 	public Color color;
 	PersonalNetworkHUD pnh;
-	NetworkController nc;
+	public NetworkController nc;
 	// Use this for initialization
 	void Start () 
 	{
@@ -64,6 +64,6 @@ public class GameController : MonoBehaviour {
 
 	public void startGame()
 	{
-		nc.RpcDisableCanvases ();
+		nc.DisableCanvases ();
 	}
 }

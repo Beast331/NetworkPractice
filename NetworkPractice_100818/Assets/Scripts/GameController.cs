@@ -11,9 +11,11 @@ public class GameController : MonoBehaviour {
 	public Canvas [] canvases;
 	public Color color;
 	PersonalNetworkHUD pnh;
+	NetworkController nc;
 	// Use this for initialization
 	void Start () 
 	{
+		nc = GameObject.Find ("NetworkController").GetComponent<NetworkController> ();
 		pnh = GameObject.Find("NetworkManager").GetComponent<PersonalNetworkHUD>();
 	}
 	
@@ -59,12 +61,9 @@ public class GameController : MonoBehaviour {
 		pnh.JoinGame(ipAddress);
 		
 	}
-	
+
 	public void startGame()
 	{
-		  for (int i = 0; i < canvases.Length; i++)
-		  {
-			  canvases[i].gameObject.SetActive(false);
-		  }
+		nc.RpcDisableCanvases ();
 	}
 }

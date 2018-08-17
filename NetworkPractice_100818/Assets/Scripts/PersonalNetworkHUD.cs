@@ -6,7 +6,16 @@ using UnityEngine.UI;
 public class PersonalNetworkHUD : NetworkManager {
 
 	// Use this for initialization
+	GameController gc;
 	public bool hostCreated;
+	private int numberOfSpawns;
+	NetworkStartPosition [] startingPositions;
+
+	void Start()
+	{
+		gc = GameObject.Find("GameController").GetComponent<GameController>();
+		startingPositions = FindObjectsOfType<NetworkStartPosition>();
+	}
 	public void StartupHost()
 	{
 		if (hostCreated)
@@ -41,8 +50,14 @@ public class PersonalNetworkHUD : NetworkManager {
     {
 		Debug.Log("OnServerAddPlayer");
         GameObject player;
-        player = (GameObject)Object.Instantiate(playerPrefab, Vector3.zero, Quaternion.identity);
+		if (numberOfSpawns < startingPositions.Length)
+			player = (GameObject)Object.Instantiate (playerPrefab, startingPositions [numberOfSpawns].GetComponent<Transform>().position, Quaternion.identity);
+		else 
+		{
+			player = (GameObject)Object.Instantiate (playerPrefab, startingPositions [numberOfSpawns%(startingPositions.Length)].GetComponent<Transform>().position, Quaternion.identity);
+		}
         NetworkServer.AddPlayerForConnection(conn, player, playerControllerId);
+		numberOfSpawns += 1;
     }
  
    /*  public override void OnClientSceneChanged(NetworkConnection conn)
@@ -59,4 +74,7 @@ public class PersonalNetworkHUD : NetworkManager {
 		Debug.Log("Setting IP...");
 		NetworkManager.singleton.networkAddress = ip;
 	}
+
+
+		
 }

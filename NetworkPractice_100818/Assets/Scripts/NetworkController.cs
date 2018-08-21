@@ -14,15 +14,11 @@ public class NetworkController : NetworkBehaviour {
 	void Update () {
 		
 	}
-		
-	public void DisableCanvases()
-	{
-		RpcDisableCanvases ();
-	}
 
 	[ClientRpc]
-	void RpcDisableCanvases()
+	public void RpcDisableCanvases()
 	{
+		Debug.Log ("Disabling...");
 		for (int i = 0; i < gc.canvases.Length; i++)
 		{
 			gc.canvases[i].gameObject.SetActive(false);

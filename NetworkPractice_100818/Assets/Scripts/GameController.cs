@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+
 public class GameController : MonoBehaviour {
 	public Text userNameField;
 	public Text ipField;
@@ -11,17 +12,15 @@ public class GameController : MonoBehaviour {
 	public Canvas [] canvases;
 	public Color color;
 	PersonalNetworkHUD pnh;
-	public NetworkController nc;
+
 	// Use this for initialization
 	void Start () 
 	{
-		nc = GameObject.Find ("NetworkController").GetComponent<NetworkController> ();
 		pnh = GameObject.Find("NetworkManager").GetComponent<PersonalNetworkHUD>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
 	}
 	
 	public void userName()
@@ -61,9 +60,10 @@ public class GameController : MonoBehaviour {
 		pnh.JoinGame(ipAddress);
 		
 	}
-
+		
 	public void startGame()
 	{
-		nc.DisableCanvases ();
+			SceneManager.LoadScene("PlayScene");
+			pnh.ServerChangeScene("PlayScene");
 	}
 }

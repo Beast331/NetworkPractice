@@ -1387,7 +1387,7 @@ MonoBehaviour:
   m_ScriptCRCCheck: 1
   m_MaxDelay: 0.01
   m_LogLevel: 2
-  m_PlayerPrefab: {fileID: 1866473859100602, guid: 67db223fd8e1fb04da7b0489a5aac73f,
+  m_PlayerPrefab: {fileID: 1225345642567518, guid: 67db223fd8e1fb04da7b0489a5aac73f,
     type: 2}
   m_AutoCreatePlayer: 0
   m_PlayerSpawnMethod: 1
@@ -1531,46 +1531,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 770612797}
---- !u!1 &785159975
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 785159977}
-  - component: {fileID: 785159976}
-  m_Layer: 0
-  m_Name: NetworkController
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &785159976
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 785159975}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ebec35be31d6a542aca8fdca5972eec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &785159977
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 785159975}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 12
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &852382730
 GameObject:
   m_ObjectHideFlags: 0
@@ -3407,7 +3367,6 @@ MonoBehaviour:
   - {fileID: 902907341}
   - {fileID: 1436511846}
   color: {r: 0, g: 0, b: 0, a: 0}
-  nc: {fileID: 0}
 --- !u!4 &2117689593
 Transform:
   m_ObjectHideFlags: 0

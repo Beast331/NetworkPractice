@@ -3,17 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 public class PersonalNetworkHUD : NetworkManager {
 
 	// Use this for initialization
 	public bool hostCreated;
 	private int numberOfSpawns;
 	NetworkStartPosition [] startingPositions;
+	GameController gc;
 
 	void Start()
 	{
 		startingPositions = FindObjectsOfType<NetworkStartPosition>();
 	}
+
 	public void StartupHost()
 	{
 		if (hostCreated)
@@ -41,7 +44,6 @@ public class PersonalNetworkHUD : NetworkManager {
 	
 	// Update is called once per frame
 	void Update () {
-		
 	}
 	
 	 public override void OnServerAddPlayer (NetworkConnection conn, short playerControllerId)
@@ -56,6 +58,7 @@ public class PersonalNetworkHUD : NetworkManager {
 		}
         NetworkServer.AddPlayerForConnection(conn, player, playerControllerId);
 		numberOfSpawns += 1;
+
     }
  
    /*  public override void OnClientSceneChanged(NetworkConnection conn)
@@ -73,6 +76,11 @@ public class PersonalNetworkHUD : NetworkManager {
 		NetworkManager.singleton.networkAddress = ip;
 	}
 
+	public override void ServerChangeScene(string newSceneName)
+	{
+		SceneManager.LoadScene(newSceneName);
+		base.ServerChangeScene(newSceneName);
 
+	}
 		
 }

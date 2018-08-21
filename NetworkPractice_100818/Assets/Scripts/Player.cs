@@ -9,6 +9,11 @@ public class Player : NetworkBehaviour
 	public string userDisplay;
 	[SyncVar]
 	private Color c;
+
+	void Awake () {
+		DontDestroyOnLoad (transform.gameObject);
+	}
+
 	void Start()
 	{
 		gc = GameObject.Find("GameController").GetComponent<GameController>();
@@ -27,10 +32,13 @@ public class Player : NetworkBehaviour
         }
 
         var x = Input.GetAxis("Horizontal") * Time.deltaTime * 150.0f;
-        var z = Input.GetAxis("Vertical") * Time.deltaTime * 3.0f;
+        var z = Input.GetAxis("Vertical") * Time.deltaTime * -3.0f;
 
         transform.Rotate(0, x, 0);
         transform.Translate(0, 0, z);
     }
+
+
+
 		
 }

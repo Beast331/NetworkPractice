@@ -7,7 +7,6 @@ using UnityEngine.SceneManagement;
 public class PersonalNetworkHUD : NetworkManager {
 
 	// Use this for initialization
-	public bool hostCreated;
 	private int numberOfSpawns;
 	NetworkStartPosition [] startingPositions;
 	GameController gc;
@@ -19,13 +18,10 @@ public class PersonalNetworkHUD : NetworkManager {
 
 	public void StartupHost()
 	{
-		if (hostCreated)
-			return;
 		SetPort();
 		NetworkServer.Reset();
 		NetworkManager.singleton.StartHost();
 		Debug.Log("StartupHost");
-		hostCreated = true;
 	}
 	
 	public void JoinGame(string ip)

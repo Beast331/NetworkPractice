@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour {
+	
 	public Text userNameField;
 	public Text ipField;
 	string ipAddress;
@@ -12,6 +13,7 @@ public class GameController : MonoBehaviour {
 	public Canvas [] canvases;
 	public Color color;
 	PersonalNetworkHUD pnh;
+	public Text playerNames;
 
 	// Use this for initialization
 	void Start () 
@@ -20,7 +22,8 @@ public class GameController : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update () 
+	{
 	}
 	
 	public void userName()
@@ -38,9 +41,12 @@ public class GameController : MonoBehaviour {
 	
 	public void host()
 	{
-		Debug.Log("Host...");
 		canvases[2].enabled = false;
 		canvases[3].gameObject.SetActive(true);
+		foreach (GameObject i in GameObject.FindGameObjectsWithTag("GameController"))
+		{
+			playerNames.text += i.GetComponent<Player> ().userDisplay + "\n";
+		}
 		pnh.StartupHost();
 	}
 	
@@ -57,13 +63,17 @@ public class GameController : MonoBehaviour {
 		canvases[4].gameObject.SetActive(false);
 		canvases[3].gameObject.SetActive(true);
 		canvases[3].transform.GetChild(1).gameObject.SetActive(false);
+		foreach (GameObject i in GameObject.FindGameObjectsWithTag("Player"))
+		{
+			playerNames.text += i.GetComponent<Player> ().userDisplay + "\n";
+		}
 		pnh.JoinGame(ipAddress);
 		
 	}
 		
 	public void startGame()
 	{
-			SceneManager.LoadScene("PlayScene");
-			pnh.ServerChangeScene("PlayScene");
+		SceneManager.LoadScene("PlayScene");
+		pnh.ServerChangeScene("PlayScene");
 	}
 }

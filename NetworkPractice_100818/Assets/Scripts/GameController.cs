@@ -14,16 +14,33 @@ public class GameController : MonoBehaviour {
 	public Color color;
 	PersonalNetworkHUD pnh;
 	public Text playerNames;
-
+	List<string> players = new List<string>();
+	bool nameAdded = false;
 	// Use this for initialization
 	void Start () 
 	{
 		pnh = GameObject.Find("NetworkManager").GetComponent<PersonalNetworkHUD>();
 	}
-	
 	// Update is called once per frame
-	void Update () 
-	{
+	void FixedUpdate () 
+	{	
+
+		foreach (GameObject i in GameObject.FindGameObjectsWithTag("Player")) {
+			if (!players.Contains (i.GetComponent<Player> ().userDisplay)) {
+				players.Add ((i.GetComponent<Player> ().userDisplay).Trim());
+				nameAdded = true;
+			}
+		}
+			if (nameAdded)
+			{
+				playerNames.text = "Players:";
+				foreach (string j in players)
+				{
+				playerNames.text += "\n" + j;
+				}
+			}
+			nameAdded = false;
+
 	}
 	
 	public void userName()
@@ -43,10 +60,6 @@ public class GameController : MonoBehaviour {
 	{
 		canvases[2].enabled = false;
 		canvases[3].gameObject.SetActive(true);
-		foreach (GameObject i in GameObject.FindGameObjectsWithTag("GameController"))
-		{
-			playerNames.text += i.GetComponent<Player> ().userDisplay + "\n";
-		}
 		pnh.StartupHost();
 	}
 	
@@ -62,18 +75,21 @@ public class GameController : MonoBehaviour {
 		ipField.text = "";
 		canvases[4].gameObject.SetActive(false);
 		canvases[3].gameObject.SetActive(true);
-		canvases[3].transform.GetChild(1).gameObject.SetActive(false);
-		foreach (GameObject i in GameObject.FindGameObjectsWithTag("Player"))
-		{
-			playerNames.text += i.GetComponent<Player> ().userDisplay + "\n";
-		}
+		canvases[3].transform.GetChild(3).gameObject.SetActive(false);
 		pnh.JoinGame(ipAddress);
 		
 	}
 		
 	public void startGame()
 	{
+		foreach (GameObject i in GameObject.FindGameObjectsWithTag("Player"))
+		{
+			DontDestroyOnLoad (i);
+		}
+		DontDestroyOnLoad (this.gameObject);
+		DontDestroyOnLoad (pnh.gameObject);
 		SceneManager.LoadScene("PlayScene");
 		pnh.ServerChangeScene("PlayScene");
 	}
+		
 }

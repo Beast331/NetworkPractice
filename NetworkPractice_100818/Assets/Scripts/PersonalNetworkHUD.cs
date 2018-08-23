@@ -7,9 +7,10 @@ using UnityEngine.SceneManagement;
 public class PersonalNetworkHUD : NetworkManager {
 
 	// Use this for initialization
-	private int numberOfSpawns;
+	public int numberOfSpawns;
 	NetworkStartPosition [] startingPositions;
 	GameController gc;
+
 
 	void Start()
 	{
@@ -54,7 +55,6 @@ public class PersonalNetworkHUD : NetworkManager {
 		}
         NetworkServer.AddPlayerForConnection(conn, player, playerControllerId);
 		numberOfSpawns += 1;
-
     }
  
    /*  public override void OnClientSceneChanged(NetworkConnection conn)

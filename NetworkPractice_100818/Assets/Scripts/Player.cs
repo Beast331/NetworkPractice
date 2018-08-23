@@ -6,13 +6,10 @@ public class Player : NetworkBehaviour
 	GameController gc;
 	[SyncVar]
 	private string username;
+	[SyncVar (hook = "changedName")]
 	public string userDisplay;
 	[SyncVar]
 	private Color c;
-
-	void Awake () {
-		DontDestroyOnLoad (transform.gameObject);
-	}
 
 	void Start()
 	{
@@ -22,6 +19,8 @@ public class Player : NetworkBehaviour
 			c = gc.color;
 		}
 		GetComponent<MeshRenderer> ().material.color = c;
+		userDisplay = username;
+
 	}
     void Update()
     {
@@ -36,9 +35,20 @@ public class Player : NetworkBehaviour
 
         transform.Rotate(0, x, 0);
         transform.Translate(0, 0, z);
+		CmdVars (username, c);
     }
 
-
+	[Command]
+	public void CmdVars(string name, Color c)
+	{
+		userDisplay = name;
+		GetComponent<MeshRenderer> ().material.color = c;
+	}
+	void changedName (string playerName)
+	{
+		userDisplay = playerName;
+	}
+	
 
 		
 }

@@ -14,7 +14,7 @@ public class GameController : MonoBehaviour {
 	public Color color;
 	PersonalNetworkHUD pnh;
 	public Text playerNames;
-	List<string> players = new List<string>();
+	public List<string> players = new List<string>();
 	bool nameAdded = false;
 	// Use this for initialization
 	void Start () 
@@ -25,9 +25,9 @@ public class GameController : MonoBehaviour {
 	void FixedUpdate () 
 	{	
 
-		foreach (GameObject i in GameObject.FindGameObjectsWithTag("Player")) {
-			if (!players.Contains (i.GetComponent<Player> ().userDisplay)) {
-				players.Add ((i.GetComponent<Player> ().userDisplay).Trim());
+		foreach (Player i in Object.FindObjectsOfType(typeof(Player))) {
+			if (!players.Contains (i.userDisplay)) {
+				players.Add ((i.userDisplay).Trim());
 				nameAdded = true;
 			}
 		}
@@ -82,9 +82,9 @@ public class GameController : MonoBehaviour {
 		
 	public void startGame()
 	{
-		foreach (GameObject i in GameObject.FindGameObjectsWithTag("Player"))
+		foreach (Player i in Object.FindObjectsOfType(typeof(Player)))
 		{
-			DontDestroyOnLoad (i);
+			DontDestroyOnLoad (i.gameObject);
 		}
 		DontDestroyOnLoad (this.gameObject);
 		DontDestroyOnLoad (pnh.gameObject);

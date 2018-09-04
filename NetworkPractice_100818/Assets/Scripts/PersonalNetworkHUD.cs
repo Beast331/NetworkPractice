@@ -14,6 +14,7 @@ public class PersonalNetworkHUD : NetworkManager {
 
 	void Start()
 	{
+		gc = GameObject.Find ("GameController").GetComponent<GameController>();
 		startingPositions = FindObjectsOfType<NetworkStartPosition>();
 	}
 

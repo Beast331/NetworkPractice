@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.Networking;
-
+using UnityEngine.SceneManagement;
 public class Player : NetworkBehaviour
 {
 	GameController gc;
@@ -10,13 +10,16 @@ public class Player : NetworkBehaviour
 	public string userDisplay;
 	[SyncVar]
 	private Color c;
-
+	private int playerCount;
 	void Start()
 	{
+		DontDestroyOnLoad (this.gameObject);
 		gc = GameObject.Find("GameController").GetComponent<GameController>();
+		playerCount = gc.players.Count;
 		if (isLocalPlayer) {
-			username = gc.username;
-			c = gc.color;
+				PlayerPrefs.SetString ("PlayerName" + playerCount, gc.username);
+				username = gc.username;
+				c = gc.color;
 		}
 		GetComponent<MeshRenderer> ().material.color = c;
 		userDisplay = username;
@@ -24,7 +27,10 @@ public class Player : NetworkBehaviour
 	}
     void Update()
     {
-		userDisplay = username;
+		if (isLocalPlayer) {
+			Debug.Log ("PlayerName" + playerCount + " " + PlayerPrefs.GetString ("PlayerName" + playerCount));
+			userDisplay = PlayerPrefs.GetString ("PlayerName" + playerCount);
+		}
         if (!isLocalPlayer)
         {
             return;
@@ -48,7 +54,6 @@ public class Player : NetworkBehaviour
 	{
 		userDisplay = playerName;
 	}
-	
 
 		
 }

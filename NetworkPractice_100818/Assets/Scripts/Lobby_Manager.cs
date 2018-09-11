@@ -17,4 +17,8 @@ public class Lobby_Manager : NetworkLobbyManager {
 		Debug.Log ("Game has started lol");
 		lobby.SetActive (true);
 	}
+
+	public Lobby_Manager()
+	{
+	}
 }

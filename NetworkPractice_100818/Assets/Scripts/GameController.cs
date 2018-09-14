@@ -16,6 +16,8 @@ public class GameController : MonoBehaviour {
 	public Text playerNames;
 	public List<string> players = new List<string>();
 	bool nameAdded = false;
+	bool allPlayersReady = true;
+	bool playersExist = false;
 	// Use this for initialization
 	void Start () 
 	{
@@ -26,11 +28,19 @@ public class GameController : MonoBehaviour {
 	{	
 
 		foreach (Player i in Object.FindObjectsOfType(typeof(Player))) {
+			playersExist = true;
 			if (!players.Contains (i.userDisplay)) {
 				players.Add ((i.userDisplay).Trim());
 				nameAdded = true;
 			}
+			if (i.readyToPlay == false)
+				allPlayersReady = false;
 		}
+		if (playersExist && allPlayersReady) 
+		{
+			startGame ();
+		}
+		allPlayersReady = true;
 			if (nameAdded)
 			{
 				playerNames.text = "Players:";
@@ -75,21 +85,32 @@ public class GameController : MonoBehaviour {
 		ipField.text = "";
 		canvases[4].gameObject.SetActive(false);
 		canvases[3].gameObject.SetActive(true);
-		canvases[3].transform.GetChild(3).gameObject.SetActive(false);
 		pnh.JoinGame(ipAddress);
 		
 	}
 		
 	public void startGame()
 	{
+//		foreach (Player i in Object.FindObjectsOfType(typeof(Player)))
+//		{
+//			DontDestroyOnLoad (i.gameObject);
+//		}
+//		DontDestroyOnLoad (this.gameObject);
+//		DontDestroyOnLoad (pnh.gameObject);
+//		SceneManager.LoadScene("PlayScene");
+//		pnh.ServerChangeScene("PlayScene");
+		for (int i = 0; i < canvases.Length; i++) 
+		{
+			canvases [i].gameObject.SetActive (false);
+		}
+	}
+
+	public void readyForGame()
+	{
 		foreach (Player i in Object.FindObjectsOfType(typeof(Player)))
 		{
-			DontDestroyOnLoad (i.gameObject);
+			i.readyForGame ();
 		}
-		DontDestroyOnLoad (this.gameObject);
-		DontDestroyOnLoad (pnh.gameObject);
-		SceneManager.LoadScene("PlayScene");
-		pnh.ServerChangeScene("PlayScene");
 	}
 		
 }

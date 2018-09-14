@@ -11,6 +11,8 @@ public class Player : NetworkBehaviour
 	[SyncVar]
 	private Color c;
 	private int playerCount;
+	[SyncVar]
+	public bool readyToPlay;
 	void Start()
 	{
 		DontDestroyOnLoad (this.gameObject);
@@ -53,6 +55,22 @@ public class Player : NetworkBehaviour
 	void changedName (string playerName)
 	{
 		userDisplay = playerName;
+	}
+
+	public void readyForGame()
+	{
+		if (isLocalPlayer) 
+		{
+			Debug.Log ("Ready!!!!");
+			readyToPlay = true;
+			CmdReadyToPlay (true);
+		}
+	}
+
+	[Command]
+	public void CmdReadyToPlay(bool readyToPlay)
+	{
+		this.readyToPlay = readyToPlay;
 	}
 
 		

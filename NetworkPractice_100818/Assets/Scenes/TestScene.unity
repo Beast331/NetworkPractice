@@ -3349,7 +3349,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2117689592}
-        m_MethodName: startGame
+        m_MethodName: readyForGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3432,6 +3432,7 @@ MonoBehaviour:
   - {fileID: 1436511846}
   color: {r: 0, g: 0, b: 0, a: 0}
   playerNames: {fileID: 22401638}
+  players: []
 --- !u!4 &2117689593
 Transform:
   m_ObjectHideFlags: 0
@@ -3512,7 +3513,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Start!
+  m_Text: Ready!
 --- !u!222 &2126603569
 CanvasRenderer:
   m_ObjectHideFlags: 0
